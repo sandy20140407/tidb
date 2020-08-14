@@ -2182,7 +2182,6 @@ func (s *session) InitTxnWithStartTS(startTS uint64) error {
 	if s.txn.Valid() {
 		return nil
 	}
-	logutil.BgLogger().Info("hello,transaction.")
 	// no need to get txn from txnFutureCh since txn should init with startTs
 	txn, err := s.store.BeginWithStartTS(startTS)
 	if err != nil {
@@ -2249,7 +2248,7 @@ func logQuery(query string, vars *variable.SessionVars) {
 			zap.Uint64("conn", vars.ConnectionID),
 			zap.Stringer("user", vars.User),
 			zap.Int64("schemaVersion", vars.TxnCtx.SchemaVersion),
-			zap.Uint64("txnStartTS", vars.TxnCtx.StartTS),
+			zap.Uint64("hell transaction,txnStartTS", vars.TxnCtx.StartTS),
 			zap.Uint64("forUpdateTS", vars.TxnCtx.GetForUpdateTS()),
 			zap.Bool("isReadConsistency", vars.IsReadConsistencyTxn()),
 			zap.String("current_db", vars.CurrentDB),
