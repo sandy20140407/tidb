@@ -1020,6 +1020,7 @@ func (s *session) SetProcessInfo(sql string, t time.Time, command byte, maxExecu
 	var curTxnStartTS uint64
 	if command != mysql.ComSleep || s.GetSessionVars().InTxn() {
 		curTxnStartTS = s.sessionVars.TxnCtx.StartTS
+		logutil.BgLogger().Info("hello,transaction.")
 	}
 	pi := util.ProcessInfo{
 		ID:               s.sessionVars.ConnectionID,
