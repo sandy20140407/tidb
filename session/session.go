@@ -1020,7 +1020,6 @@ func (s *session) SetProcessInfo(sql string, t time.Time, command byte, maxExecu
 	var curTxnStartTS uint64
 	if command != mysql.ComSleep || s.GetSessionVars().InTxn() {
 		curTxnStartTS = s.sessionVars.TxnCtx.StartTS
-		logutil.BgLogger().Info("hello,transaction.")
 	}
 	pi := util.ProcessInfo{
 		ID:               s.sessionVars.ConnectionID,
@@ -2183,7 +2182,7 @@ func (s *session) InitTxnWithStartTS(startTS uint64) error {
 	if s.txn.Valid() {
 		return nil
 	}
-
+	logutil.BgLogger().Info("hello,transaction.")
 	// no need to get txn from txnFutureCh since txn should init with startTs
 	txn, err := s.store.BeginWithStartTS(startTS)
 	if err != nil {
