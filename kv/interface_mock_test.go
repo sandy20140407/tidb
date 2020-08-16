@@ -155,6 +155,8 @@ func (*mockTxn) IsPessimistic() bool {
 
 // BeginWithStartTS begins a transaction with startTS.
 func (s *mockStorage) BeginWithStartTS(startTS uint64) (Transaction, error) {
+	logutil.BgLogger().Info("hello trasaction on mockStorage.BeginWithStartTS()~")
+
 	return s.Begin()
 }
 

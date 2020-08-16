@@ -28,6 +28,7 @@ import (
 	"github.com/pingcap/tidb/util"
 	"github.com/pingcap/tidb/util/disk"
 	"github.com/pingcap/tidb/util/kvcache"
+	"github.com/pingcap/tidb/util/logutil"
 	"github.com/pingcap/tidb/util/memory"
 	"github.com/pingcap/tidb/util/sqlexec"
 	"github.com/pingcap/tidb/util/stringutil"
@@ -166,6 +167,8 @@ func (c *Context) RefreshTxnCtx(ctx context.Context) error {
 
 // InitTxnWithStartTS implements the sessionctx.Context interface with startTS.
 func (c *Context) InitTxnWithStartTS(startTS uint64) error {
+	logutil.BgLogger().Info("hello trasaction on Context.InitTxnWithStartTS()~")
+
 	if c.txn.Valid() {
 		return nil
 	}

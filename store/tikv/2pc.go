@@ -669,7 +669,6 @@ func sendTxnHeartBeat(bo *Backoffer, store *tikvStore, primary []byte, startTS, 
 // execute executes the two-phase commit protocol.
 func (c *twoPhaseCommitter) execute(ctx context.Context) (err error) {
 	var binlogSkipped bool
-	logutil.Logger(ctx).Info("hello transaction on execute()")
 	defer func() {
 		// Always clean up all written keys if the txn does not commit.
 		c.mu.RLock()

@@ -18,6 +18,7 @@ import (
 
 	"github.com/pingcap/tidb/kv"
 	"github.com/pingcap/tidb/store/tikv/oracle"
+	"github.com/pingcap/tidb/util/logutil"
 )
 
 // Store implements kv.Storage interface.
@@ -35,7 +36,10 @@ func (s *Store) GetOracle() oracle.Oracle { return nil }
 func (s *Store) Begin() (kv.Transaction, error) { return nil, nil }
 
 // BeginWithStartTS implements kv.Storage interface.
-func (s *Store) BeginWithStartTS(startTS uint64) (kv.Transaction, error) { return s.Begin() }
+func (s *Store) BeginWithStartTS(startTS uint64) (kv.Transaction, error) {
+	logutil.BgLogger().Info("hello trasaction on store.BeginWithStartTS()~")
+	return s.Begin()
+}
 
 // GetSnapshot implements kv.Storage interface.
 func (s *Store) GetSnapshot(ver kv.Version) (kv.Snapshot, error) { return nil, nil }

@@ -16,6 +16,8 @@ package kv
 import (
 	"context"
 	"sync"
+
+	"github.com/pingcap/tidb/util/logutil"
 )
 
 // InjectionConfig is used for fault injections for KV components.
@@ -65,6 +67,8 @@ func (s *InjectedStore) Begin() (Transaction, error) {
 
 // BeginWithStartTS creates an injected Transaction with startTS.
 func (s *InjectedStore) BeginWithStartTS(startTS uint64) (Transaction, error) {
+	logutil.BgLogger().Info("hello trasaction on InjectedStore.BeginWithStartTS()~")
+
 	txn, err := s.Storage.BeginWithStartTS(startTS)
 	return &InjectedTransaction{
 		Transaction: txn,
