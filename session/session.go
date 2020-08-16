@@ -1499,6 +1499,7 @@ func (s *session) isTxnRetryable() bool {
 
 func (s *session) NewTxn(ctx context.Context) error {
 	if s.txn.Valid() {
+		logutil.Logger(ctx).Info("hello trasaction on NewTxn()~")
 		txnID := s.txn.StartTS()
 		err := s.CommitTxn(ctx)
 		if err != nil {
@@ -2179,6 +2180,7 @@ func (s *session) RefreshTxnCtx(ctx context.Context) error {
 
 // InitTxnWithStartTS create a transaction with startTS.
 func (s *session) InitTxnWithStartTS(startTS uint64) error {
+	logutil.BgLogger().Info("hello trasaction on InitTxnWithStartTS()~")
 	if s.txn.Valid() {
 		return nil
 	}
@@ -2248,7 +2250,7 @@ func logQuery(query string, vars *variable.SessionVars) {
 			zap.Uint64("conn", vars.ConnectionID),
 			zap.Stringer("user", vars.User),
 			zap.Int64("schemaVersion", vars.TxnCtx.SchemaVersion),
-			zap.Uint64("hell transaction,txnStartTS", vars.TxnCtx.StartTS),
+			zap.Uint64("txnStartTS", vars.TxnCtx.StartTS),
 			zap.Uint64("forUpdateTS", vars.TxnCtx.GetForUpdateTS()),
 			zap.Bool("isReadConsistency", vars.IsReadConsistencyTxn()),
 			zap.String("current_db", vars.CurrentDB),
